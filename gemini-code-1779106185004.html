@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steam級槍戰 RPG - 特工管理中心</title>
+    <style>
+        /* 基礎深色遊戲風格樣式 */
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .auth-container {
+            background-color: #262626;
+            border: 2px solid #ff4444;
+            border-radius: 8px;
+            padding: 30px;
+            width: 350px;
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.2);
+        }
+
+        /* 切換標籤樣式 */
+        .auth-tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #404040;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #888888;
+            font-size: 16px;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: #ff4444;
+            border-bottom: 3px solid #ff4444;
+            font-weight: bold;
+        }
+
+        /* 表單內容樣式 */
+        .form-block {
+            display: none; /* 預設先全部隱藏，由 JS 控制顯示 */
+        }
+
+        .form-block.active {
+            display: block; /* 加上 active 類別的才顯示 */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #cccccc;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #333333;
+            border: 1px solid #555555;
+            color: #ffffff;
+            border-radius: 4px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff4444;
+        }
+
+        /* 按鈕樣式 */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: #cc3333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="auth-container">
+    <div class="auth-tabs">
+        <button id="tab-login" class="tab-btn active" onclick="switchTab('login')">特工登入</button>
+        <button id="tab-register" class="tab-btn" onclick="switchTab('register')">註冊帳籍</button>
+    </div>
+
+    <div id="form-login" class="form-block active">
+        <div class="form-group">
+            <label for="login-user">特工代號 (帳號)</label>
+            <input type="text" id="login-user" placeholder="請輸入帳號">
+        </div>
+        <div class="form-group">
+            <label for="login-pass">安全密鑰 (密碼)</label>
+            <input type="password" id="login-pass" placeholder="請輸入密碼">
+        </div>
+        <button class="submit-btn">執行登入進駐</button>
+    </div>
+
+    <div id="form-register" class="form-block">
+        <div class="form-group">
+            <label for="reg-user">設定新代號 (新帳號)</label>
+            <input type="text" id="reg-user" placeholder="請輸入新帳號">
+        </div>
+        <div class="form-group">
+            <label for="reg-pass">設定安全密鑰 (新密碼)</label>
+            <input type="password" id="reg-pass" placeholder="請輸入新密碼">
+        </div>
+        <div class="form-group">
+            <label for="reg-confirm">確認安全密鑰</label>
+            <input type="password" id="reg-confirm" placeholder="請再次輸入密碼">
+        </div>
+        <button class="submit-btn">建立特工帳籍</button>
+    </div>
+</div>
+
+<script>
+    // 切換頁籤的 JavaScript 函式
+    function switchTab(type) {
+        // 取得所有表單區塊與標籤按鈕
+        const loginForm = document.getElementById('form-login');
+        const registerForm = document.getElementById('form-register');
+        const loginTab = document.getElementById('tab-login');
+        const registerTab = document.getElementById('tab-register');
+
+        if (type === 'login') {
+            // 顯示登入，隱藏註冊
+            loginForm.classList.add('active');
+            registerForm.classList.remove('active');
+            // 啟用登入標籤高亮
+            loginTab.classList.add('active');
+            registerTab.classList.remove('active');
+        } else if (type === 'register') {
+            // 顯示註冊，隱藏登入
+            registerForm.classList.add('active');
+            loginForm.classList.remove('active');
+            // 啟用註冊標籤高亮
+            registerTab.classList.add('active');
+            loginTab.classList.remove('active');
+        }
+    }
+</script>
+
+</body>
+</html>
